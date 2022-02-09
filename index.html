@@ -4,12 +4,19 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link rel="preload" href="/js/bootstrap.min.js" as="script" type="text/javascript">
+    <link rel="stylesheet" href="/css/bootstrap-reboot.css">
+    <link rel="stylesheet" href="/css/bootstrap-reboot.min.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
     <link rel="modulepreload" href="/pkg/package.js" as="script" type="text/javascript">
     <link rel="preload" href="/pkg/package_bg.wasm" as="fetch" type="application/wasm" crossorigin="anonymous">
 </head>
 
 <body>
-    <section id="app"></section>
+    <section id="app" ></section>
     <script type="module">
         import init from '/pkg/package.js';
         init('/pkg/package_bg.wasm');

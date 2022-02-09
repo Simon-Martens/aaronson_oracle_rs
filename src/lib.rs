@@ -1,7 +1,8 @@
-// (Lines like the one below ignore selected Clippy rules
-//  - it's useful when you want to check your code with `cargo make verify`
-// but some rules are too "annoying" or are not applicable for your case.)
-#![allow(clippy::wildcard_imports)]
+//! A simple, cliché example demonstrating structure and syntax.
+//! Inspired by [Elm example](https://guide.elm-lang.org/architecture/buttons.html).
+
+// Some Clippy linter rules are ignored for the sake of simplicity.
+#![allow(clippy::needless_pass_by_value, clippy::trivially_copy_pass_by_ref)]
 
 use seed::{prelude::*, *};
 
@@ -9,35 +10,29 @@ use seed::{prelude::*, *};
 //     Init
 // ------ ------
 
-// `init` describes what should happen when your app started.
 fn init(_: Url, _: &mut impl Orders<Msg>) -> Model {
-    Model { counter: 0 }
+    Model::default()
 }
 
 // ------ ------
 //     Model
 // ------ ------
 
-// `Model` describes our app state.
-struct Model {
-    counter: i32,
-}
+type Model = i32;
 
 // ------ ------
 //    Update
 // ------ ------
 
-// (Remove the line below once any of your `Msg` variants doesn't implement `Copy`.)
-#[derive(Copy, Clone)]
-// `Msg` describes the different events you can modify state with.
 enum Msg {
     Increment,
+    Decrement,
 }
 
-// `update` describes how to handle each `Msg`.
 fn update(msg: Msg, model: &mut Model, _: &mut impl Orders<Msg>) {
     match msg {
-        Msg::Increment => model.counter += 1,
+        Msg::Increment => *model += 1,
+        Msg::Decrement => *model -= 1,
     }
 }
 
@@ -45,12 +40,12 @@ fn update(msg: Msg, model: &mut Model, _: &mut impl Orders<Msg>) {
 //     View
 // ------ ------
 
-// `view` describes what to display.
 fn view(model: &Model) -> Node<Msg> {
     div![
-        "This is a counter: ",
-        C!["counter"],
-        button![model.counter, ev(Ev::Click, |_| Msg::Increment),],
+        C!["hello"],
+        button![ev(Ev::Click, |_| Msg::Decrement), "-"],
+        div![model, C!["yo"]],
+        button![ev(Ev::Click, |_| Msg::Increment), "+"],
     ]
 }
 
@@ -58,9 +53,7 @@ fn view(model: &Model) -> Node<Msg> {
 //     Start
 // ------ ------
 
-// (This function is invoked by `init` function in `index.html`.)
 #[wasm_bindgen(start)]
 pub fn start() {
-    // Mount the `app` to the element with the `id` "app".
     App::start("app", init, update, view);
 }

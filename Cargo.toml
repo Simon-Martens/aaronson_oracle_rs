@@ -1,8 +1,8 @@
 [package]
 version = "0.1.0"
-name = "{{project-name}}"
+name = "aaronson_oracle_rs"
 repository = "https://github.com/seed-rs/seed-quickstart"
-authors = ["{{authors}}"]
+authors = ["aaronson_oracle_rs"]
 description = "App Description"
 categories = ["category"]
 license = "MIT"
@@ -17,6 +17,9 @@ wasm-bindgen-test = "0.3.18"
 
 [dependencies]
 seed = "0.8.0"
+
+[dependencies.web-sys]
+version = "0.3.40"
 
 [profile.release]
 lto = true
