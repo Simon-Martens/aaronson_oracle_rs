@@ -8,14 +8,12 @@ use std::collections::HashSet;
 // ------ ------
 
 fn init(_: Url, _: &mut impl Orders<Msg>) -> Model {
-    let n_gram_size = 5;
     let mut set: HashSet<u32> = HashSet::new();
     set.insert(68);
     set.insert(70);
     Model {
         event_streams: Vec::new(),
-        n_gram_size: n_gram_size,
-        pressed_keys: SlidingWindow::new(n_gram_size),
+        pressed_keys: SlidingWindow::new(5),
         allowed_keycodes: set,
     }
 }
@@ -27,7 +25,6 @@ fn init(_: Url, _: &mut impl Orders<Msg>) -> Model {
 #[derive(Default)]
 struct Model {
     allowed_keycodes: HashSet<u32>,
-    n_gram_size: usize,
     pressed_keys: SlidingWindow<u32>,
     event_streams: Vec<StreamHandle>,
 }
@@ -35,20 +32,20 @@ struct Model {
 #[derive(Default)]
 struct SlidingWindow<T> {
     window: VecDeque<T>,
-    capacity: usize, 
+    n_gram_size: usize, 
 }
 
 impl<T> SlidingWindow<T> {
-    fn new(capacity: usize) -> SlidingWindow<T> {
+    fn new(n_gram_size: usize) -> SlidingWindow<T> {
         SlidingWindow {
-            capacity: capacity,
-            window: VecDeque::with_capacity(capacity),
+            n_gram_size: n_gram_size,
+            window: VecDeque::with_capacity(n_gram_size),
         }
     }
 
     fn push(&mut self, element: T) -> Option<T> {
         self.window.push_back(element);
-        if self.window.len() == self.capacity {
+        if self.window.len() == self.n_gram_size {
             self.window.pop_front()
         } else {
             None
@@ -57,6 +54,10 @@ impl<T> SlidingWindow<T> {
 
     fn last(&self) -> Option<&T> {
         self.window.back()
+    }
+
+    fn get_string(&self) {
+        
     }
 }
 
