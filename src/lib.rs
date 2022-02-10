@@ -1,6 +1,7 @@
 use keycodes;
 use rand::Rng;
 use seed::{prelude::*, *};
+use seed::Url;
 use std::collections::HashMap;
 use std::collections::HashSet;
 use std::collections::VecDeque;
@@ -208,7 +209,6 @@ fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
 // ------ ------
 //     View
 // ------ ------
-
 fn view(model: &Model) -> Vec<Node<Msg>> {
     vec![
         // p![format!(
@@ -226,6 +226,15 @@ fn view(model: &Model) -> Vec<Node<Msg>> {
             } else {
                 "Stop"
             }
+        ],
+        div![
+            C!["d-inline ms-4 mb-4"],
+            a![
+                attrs! {
+                    At::Href => "https://github.com/schnulller/aaronson_oracle_rs"
+                },
+                "Code"
+            ]
         ],
     ]
 }
