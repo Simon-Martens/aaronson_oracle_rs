@@ -211,19 +211,20 @@ fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
 
 fn view(model: &Model) -> Vec<Node<Msg>> {
     vec![
-        p![format!(
-            "Last combination pressed: {:?}",
-            model.pressed_keys.get_guesses()
-        )],
-        p![format!("Guess: {:?}", model.guesses.get_guess())],
-        p![format!("Last key pressed: {:?}", model.pressed_keys.last())],
-        h2![format!("Right guesses: {:?} %", model.guesses.get_percentage())],
+        // p![format!(
+        //     "Combinations pressed: {:?}",
+        //     model.pressed_keys.get_guesses()
+        // )],
+        // p![format!("Guess: {:?}", model.guesses.get_guess())],
+        // p![format!("Last key pressed: {:?}", model.pressed_keys.last())],
+        h2![format!("Right guesses: {:?}%", model.guesses.get_percentage())],
         button![
+            C!["btn btn-primary mb-3 mt-2"],
             ev(Ev::Click, |_| Msg::ToggleWatching),
             if model.event_streams.is_empty() {
-                "Start watching"
+                "Start"
             } else {
-                "Stop watching"
+                "Stop"
             }
         ],
     ]
