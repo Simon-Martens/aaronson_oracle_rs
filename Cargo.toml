@@ -17,7 +17,8 @@ wasm-bindgen-test = "0.3.18"
 
 [dependencies]
 seed = "0.8.0"
-itertools = "0.10.3"
+keycodes = "0.1.0"
+rand = "0.8.4"
 
 [dependencies.web-sys]
 version = "0.3.40"
